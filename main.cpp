@@ -88,10 +88,10 @@ public:
     }
     void insere(ListaComandos comando)
     {
-        getUlt().setProx(new No());
-        getUlt().getProx();
-        getUlt().setProx(NULL);
-        getUlt().setComando(comando);
+        getUlt()->setProx(new No());
+        getUlt()->getProx();
+        getUlt()->setProx(NULL);
+        getUlt()->setComando(comando);
     }
     No* pred(No* r)
     {
@@ -121,14 +121,24 @@ public:
             cout << endl;
         }
     }
-
+};
 int main()
 {
-    string entrada;
+    string entrada, lista[250];
+    bool valida = true;
+    int i = 0;
     cout<< "Informe uma string: " << endl;
-    while(getline(cin,entrada) && entrada != "~")
+    while(valida)
     {
-        cout << entrada << endl ;
+        getline(cin,entrada);
+        if(entrada != "~")
+        {
+            lista[i] = entrada;
+            i++;
+        }else
+        {
+            valida = false;
+        }
     }
-    return 0;
+
 }
