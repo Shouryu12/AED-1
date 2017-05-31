@@ -27,26 +27,33 @@ private:
     ListaComandos comando;
     No* prox;
 public:
-    No () {
-        prox = NULL;
-    }
-
-    No (ListaComandos comando) {
-        this->comando.setComando(comando);
-        prox = NULL;
-    }
-    ListaComandos getComando(){
+    ListaComandos getComando()
+    {
         return comando;
     }
-    void setComando(ListaComandos comando) {
+    void setComando(ListaComandos comando)
+    {
         this->comando = comando;
     }
-    No *getProx() {
+    No *getProx()
+    {
         return prox;
     }
-    void setProx(No *prox) {
+    void setProx(No *prox)
+    {
         this->prox = prox;
     }
+    No ()
+    {
+        setProx(NULL);
+    }
+
+    No (ListaComandos comando)
+    {
+        setComando(comando);
+        setProx(NULL);
+    }
+
 };
 
 class LSE
@@ -54,52 +61,61 @@ class LSE
 private:
     No *prim, *ult;
 public:
-    LSE () {
+    LSE ()
+    {
         prim = new No();
         prim->setProx(NULL);
         ult = prim;
     }
-    No *getPrim() const {
+    No *getPrim()
+    {
         return prim;
     }
 
-    void setPrim(No *prim) {
+    void setPrim(No *prim)
+    {
         prim = prim;
     }
 
-    No getUlt(){
+    No *getUlt()
+    {
         return ult;
     }
 
-    void setUlt(No *ult) {
+    void setUlt(No *ult)
+    {
         ult = ult;
     }
-    void insere(ListaComandos comando) {
+    void insere(ListaComandos comando)
+    {
         getUlt().setProx(new No());
         getUlt().getProx();
         getUlt().setProx(NULL);
         getUlt().setComando(comando);
     }
-    No* pred(No* r) {
+    No* pred(No* r)
+    {
         No* p = getPrim()->getProx();
-        while (p->getProx() != r) {
+        while (p->getProx() != r)
+        {
             p = p->getProx();
         }
         return p;
     }
-    bool vazia() {
-        return getPrim() == getUlt();
-    }
-    No* LSE::busca(ListaComandos comando) {
+    No* busca(ListaComandos comando)
+    {
         No* p = getPrim()->getProx();
-        while (p != NULL && p->getComando().getComando() != comando.getComando()) {
+        while (p != NULL && p->getComando().getComando() != comando.getComando())
+        {
             p = p->getProx();
         }
         return p;
     }
-    void print() {
+    void print()
+    {
         No* p = getPrim()->getProx();
-        while (p != NULL) {
+        while (p != NULL)
+        {
             p->getComando().print();
             p = p->getProx();
             cout << endl;
