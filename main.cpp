@@ -4,7 +4,7 @@ using namespace std;
 
 typedef string Chave;
 
-class Comando
+class ListaComandos
 {
 private:
     Chave comando;
@@ -24,21 +24,21 @@ public:
 class No
 {
 private:
-    Comando comando;
+    ListaComandos comando;
     No* prox;
 public:
     No () {
         prox = NULL;
     }
 
-    No (Comando comando) {
+    No (ListaComandos comando) {
         this->comando.setComando(comando);
         prox = NULL;
     }
-    Comando getComando(){
+    ListaComandos getComando(){
         return comando;
     }
-    void setComando(Comando comando) {
+    void setComando(ListaComandos comando) {
         this->comando = comando;
     }
     No *getProx() {
@@ -67,14 +67,14 @@ public:
         prim = prim;
     }
 
-    No getUlt() const {
+    No getUlt(){
         return ult;
     }
 
     void setUlt(No *ult) {
         ult = ult;
     }
-    void insere(Comando comando) {
+    void insere(ListaComandos comando) {
         getUlt().setProx(new No());
         getUlt().getProx();
         getUlt().setProx(NULL);
@@ -90,24 +90,12 @@ public:
     bool vazia() {
         return getPrim() == getUlt();
     }
-    No* LSE::busca(Comando comando) {
+    No* LSE::busca(ListaComandos comando) {
         No* p = getPrim()->getProx();
         while (p != NULL && p->getComando().getComando() != comando.getComando()) {
             p = p->getProx();
         }
         return p;
-    }
-    void remove(No* r, Comando& comando){
-        if (vazia() || r == NULL || r == getPrim()) {
-            cout << "impossível remover\n";
-        }
-        else {
-            comando = r->getComando();
-            No* p = pred(r);
-            p->setProx(r->getProx());
-            if (p->getProx() == NULL) setUlt(p);
-            delete r;
-        }
     }
     void print() {
         No* p = getPrim()->getProx();
