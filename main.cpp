@@ -4,141 +4,108 @@ using namespace std;
 
 typedef string Chave;
 
-class ListaComandos
+class Comando
 {
-private:
-    Chave comando;
 public:
-    Chave getComando(){
-        return getComando();
+    Chave comando;
+    Comando(){
     }
-    void setComando(Chave comando)
+    Comando(Chave comando)
     {
         this->comando = comando;
     }
-    void print(){
+    void print()
+    {
         cout << comando;
     }
 };
 
 class No
 {
-private:
-    ListaComandos comando;
-    No* prox;
 public:
-    ListaComandos getComando()
+    Comando linha;
+    No* prox;
+
+    No()
     {
-        return comando;
-    }
-    void setComando(ListaComandos comando)
-    {
-        this->comando = comando;
-    }
-    No *getProx()
-    {
-        return prox;
-    }
-    void setProx(No *prox)
-    {
-        this->prox = prox;
-    }
-    No ()
-    {
-        setProx(NULL);
+        prox = NULL;
     }
 
-    No (ListaComandos comando)
-    {
-        setComando(comando);
-        setProx(NULL);
+    No(Comando linha) {
+        this->linha = linha;
+        prox = NULL;
     }
-
 };
 
-class LSE
+class Lista
 {
-private:
-    No *prim, *ult;
 public:
-    LSE ()
+    No *prim, *ult;
+
+    Lista ()
     {
         prim = new No();
-        prim->setProx(NULL);
+        prim->prox = NULL;
         ult = prim;
     }
-    No *getPrim()
+    void insere(Comando linha)
     {
-        return prim;
-    }
-
-    void setPrim(No *prim)
-    {
-        prim = prim;
-    }
-
-    No *getUlt()
-    {
-        return ult;
-    }
-
-    void setUlt(No *ult)
-    {
-        ult = ult;
-    }
-    void insere(ListaComandos comando)
-    {
-        getUlt()->setProx(new No());
-        getUlt()->getProx();
-        getUlt()->setProx(NULL);
-        getUlt()->setComando(comando);
+        ult->prox = new No();
+        ult = ult->prox;
+        ult->prox = NULL;
+        ult->linha = linha;
     }
     No* pred(No* r)
     {
-        No* p = getPrim()->getProx();
-        while (p->getProx() != r)
+        No* p = prim->prox;
+        while (p->prox != r)
         {
-            p = p->getProx();
+            p = p->prox;
         }
         return p;
     }
-    No* busca(ListaComandos comando)
+    No* busca(Comando linha)
     {
-        No* p = getPrim()->getProx();
-        while (p != NULL && p->getComando().getComando() != comando.getComando())
+        No* p = prim->prox;
+        while (p != NULL && p->linha.comando != linha.comando)
         {
-            p = p->getProx();
+            p = p->prox;
         }
         return p;
     }
     void print()
     {
-        No* p = getPrim()->getProx();
+        No* p = prim->prox;
         while (p != NULL)
         {
-            p->getComando().print();
-            p = p->getProx();
+            p->linha.print();
+            p = p->prox;
             cout << endl;
         }
     }
 };
 int main()
 {
-    string entrada, lista[250];
+    string entrada;
     bool valida = true;
-    int i = 0;
+    Comando txt;
+    Lista bancoDados = Lista();
     cout<< "Informe uma string: " << endl;
     while(valida)
     {
+        #recebe uma entrada e enquanto o valida for true, continua o looping
         getline(cin,entrada);
         if(entrada != "~")
         {
-            lista[i] = entrada;
-            i++;
+            txt = Comando(entrada);
+            bancoDados.insere(txt);
         }else
         {
             valida = false;
         }
     }
-
+    /*O codigo de baixo é so para se vocês quiserem ver a lista
+    pode ser adaptado mais tarde também*/
+    #cout << "---------------------" << endl;
+    #bancoDados.print();
 }
