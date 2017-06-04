@@ -4,7 +4,7 @@ using namespace std;
 
 typedef string Chave;
 
-//NÛ genÈrico
+//N√≥ gen√©rico
 template<typename Tipo>
 class No
 {
@@ -13,7 +13,7 @@ private:
     No* prox;
 
 public:
-	No() {} 
+    No() {} 
 	
     Tipo getItem() {
         return x;
@@ -78,7 +78,7 @@ bool Pilha<Tipo>::vazia(){
 }
 
 template<typename Tipo>
-void Pilha<Tipo>::mostra() { //FUN«√O AINDA BUGADA. LOOP INFINITO
+void Pilha<Tipo>::mostra() { //FUN√á√ÉO AINDA BUGADA. LOOP INFINITO
     cout << "Pilha: topo-> ";
     for (No *nav = top->getProx(); nav != NULL; nav = nav->getProx()) {   	
         cout << "C";
