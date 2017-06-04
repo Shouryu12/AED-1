@@ -43,6 +43,7 @@ public:
 	void empilha(Tipo);
 	bool vazia();
 	void desempilha(Tipo&);
+	void mostra();
 };
 
 template<typename Tipo>
@@ -80,10 +81,9 @@ bool Pilha<Tipo>::vazia(){
 template<typename Tipo>
 void Pilha<Tipo>::mostra() { //FUNÇÃO AINDA BUGADA. LOOP INFINITO
     cout << "Pilha: topo-> ";
-    for (No *nav = top->getProx(); nav != NULL; nav = nav->getProx()) {   	
+    for (No<Tipo> *nav = top->getProx(); nav != NULL; nav = nav->getProx()) {   	
         cout << "C";
 		nav->getItem().mostra();
     }
     cout << "<- fundo\n";
 }
-
